@@ -1,6 +1,6 @@
 # Hotspots
 
-[![NPM Version][npm-image]][npm-url]
+[![NPM](https://nodei.co/npm/hotspots.png)](https://npmjs.org/package/hotspots)
 
 ## About
 
