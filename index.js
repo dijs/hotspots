@@ -4,14 +4,6 @@ var fs = require('fs');
 var program = require('commander');
 var getHotSpots = require('./lib');
 
-program
-	.version('0.0.1')
-	.option('-t, --pivotal-api-token <token>', 'Pivotal API Token')
-	.option('-p, --project-path <path>', 'git Project Path')
-	.option('-i, --project-id <id>', 'Pivotal Project ID')
-	.option('-o, --output <path>', 'CSV data output path')
-	.parse(process.argv);
-
 function writeData(err, scoresByFile) {
 	if (err) {
 		console.log(err);
@@ -34,7 +26,14 @@ function writeData(err, scoresByFile) {
 }
 
 if (require.main === module) {
-	if (!program.pivotalApiToken || !program.projectId || !program.projectPath || !program.output) {
+	program
+		.version('0.0.1')
+		.option('-t, --pivotal-api-token <token>', 'Pivotal API Token')
+		.option('-p, --project-path <path>', 'git Project Path')
+		.option('-i, --project-id <id>', 'Pivotal Project ID')
+		.option('-o, --output <path>', 'CSV data output path')
+		.parse(process.argv);
+	if (process.argv.length <= 2) {
 		program.help();
 	} else {
 		getHotSpots(program.pivotalApiToken, program.projectId, program.projectPath, writeData);
